@@ -1,4 +1,5 @@
 ﻿using System;
+using ConsoleLibrary;
 
 namespace Foundation
 {
@@ -9,7 +10,12 @@ namespace Foundation
             /*            ValueReference.Execute();*/
             /*Converting.Execute();*/
             /*Arrays.Execute();*/
-            Classes.Execute();
+            /*Classes.Execute();*/
+            IO.GetConsoleInt("int");
+            IO.GetConsoleFloat("float");
+            IO.GetConsoleBool("bool");
+            IO.GetConsoleChar("char");
+            IO.GetConsoleString("string");
         }
     }
 }
