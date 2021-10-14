@@ -16,7 +16,8 @@ namespace Foundation
             string prop2 = ep.prop2;
             string prop3 = ep.Prop3;
 
-            Student milton = new Student(45);
+            /*Student milton = new Student(45);*/
+            Student milton = new Student("Milton", 36);
             milton.Name = "Milton";
             Console.WriteLine("Student's name is: {0}, age: {1}", milton.Name, milton.Age);
         }
@@ -49,6 +50,14 @@ namespace Foundation
             {
                 this.Age = Age;
                 Console.WriteLine("In Constructor");
+                numberOfStudents++;
+            }
+
+            public Student(string name, int cohort, float gpa = 2.5f)
+            {
+                this.name = name;
+                this.gpa = gpa;
+                this.cohort = cohort;
                 numberOfStudents++;
             }
 
