@@ -8,7 +8,8 @@ namespace Foundation
         {
             /*            ValueReference.Execute();*/
             /*Converting.Execute();*/
-            Arrays.Execute();
+            /*Arrays.Execute();*/
+            Classes.Execute();
         }
     }
 }

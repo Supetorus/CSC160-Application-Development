@@ -10,7 +10,7 @@ namespace TicTacToe
             /*game.Play();*/
             /*            Console.WriteLine(game.TestCatsGame());
                         Console.WriteLine(game.TestWins());*/
-            game.TestCatsGame();
+            /*game.TestCatsGame();*/
         }
     }
 }
