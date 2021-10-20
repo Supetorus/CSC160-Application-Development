@@ -11,11 +11,17 @@ namespace Foundation
             /*Converting.Execute();*/
             /*Arrays.Execute();*/
             /*Classes.Execute();*/
-            IO.GetConsoleInt("int");
-            IO.GetConsoleFloat("float");
-            IO.GetConsoleBool("bool");
-            IO.GetConsoleChar("char");
-            IO.GetConsoleString("string");
+            /*            IO.GetConsoleInt("int");
+                        IO.GetConsoleFloat("float");
+                        IO.GetConsoleBool("bool");
+                        IO.GetConsoleChar("char");
+                        IO.GetConsoleString("string");*/
+            /*            IO.backgroundColor = ConsoleColor.Red;
+                        IO.textColor = ConsoleColor.Blue;
+                        IO.println("Hello");
+                        Console.WriteLine("Hello from console");*/
+
+            Interface.Execute();
         }
     }
 }
