@@ -21,7 +21,9 @@ namespace Foundation
                         IO.println("Hello");
                         Console.WriteLine("Hello from console");*/
 
-            Interface.Execute();
+            //Interface.Execute();
+
+            Practice.Execute();
         }
     }
 }
