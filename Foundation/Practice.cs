@@ -9,7 +9,7 @@ namespace Foundation
         public static void Execute()
         {
             Animal dog = new Dog("Johnny the dog");
-            Animal cat = new Cat("Sally the cat");
+            Animal cat = new Cat("Tom the cat");
             Animal fish = new Fish("Sylvia the fish");
             Animal[] animals = new Animal[3] { dog, cat, fish };
             foreach (Animal animal in animals)

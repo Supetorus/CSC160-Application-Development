@@ -61,6 +61,7 @@ namespace MasterMind
                 maxTurns--;
             }
 
+            Console.Clear();
             //If won, display Game Won!
             if (gameWon)
             {
