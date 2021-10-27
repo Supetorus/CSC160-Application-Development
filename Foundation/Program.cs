@@ -23,7 +23,12 @@ namespace Foundation
 
             //Interface.Execute();
 
-            Practice.Execute();
+            /*Practice.Execute();*/
+
+            /*Generics.Engage();*/
+            /*IO.print(IO.GetConsoleNum<int>("give int: ", int.MinValue, int.MaxValue));*/
+
+            Extensions.Execute();
         }
     }
 }

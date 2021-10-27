@@ -47,6 +47,76 @@ namespace ConsoleLibrary
             return typedValue;
         }
 
+        public static string GetConsoleNum<T>(string message, T min, T max) where T : IComparable
+        {
+            if (max.CompareTo(min) < 0) throw new System.ArgumentException("Min must be less than or equal to max.");
+            bool success = false;
+            
+            if (typeof(T) == typeof(int))
+            {
+                int typedValue;
+                do
+                {
+                    print(message);
+                    success = int.TryParse(Console.ReadLine(), out typedValue)
+                        && typedValue.CompareTo(min) >= 0 && typedValue.CompareTo(max) <= 0;
+                    if (!success)
+                    {
+                        println($"You entered an invalid number. Must be between {min} and {max} and a valid integer.");
+                    }
+                } while (!success);
+                return typedValue.ToString();
+            }
+            else if (typeof(T) == typeof(float))
+            {
+                float typedValue;
+                do
+                {
+                    print(message);
+                    success = float.TryParse(Console.ReadLine(), out typedValue)
+                        && typedValue.CompareTo(min) >= 0 && typedValue.CompareTo(max) <= 0;
+                    if (!success)
+                    {
+                        println($"You entered an invalid number. Must be between {min} and {max} and a valid integer.");
+                    }
+                } while (!success);
+                return typedValue.ToString();
+            }
+            else if (typeof(T) == typeof(long))
+            {
+                long typedValue;
+                do
+                {
+                    print(message);
+                    success = long.TryParse(Console.ReadLine(), out typedValue)
+                        && typedValue.CompareTo(min) >= 0 && typedValue.CompareTo(max) <= 0;
+                    if (!success)
+                    {
+                        println($"You entered an invalid number. Must be between {min} and {max} and a valid integer.");
+                    }
+                } while (!success);
+                return typedValue.ToString();
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                double typedValue;
+                do
+                {
+                    print(message);
+                    success = double.TryParse(Console.ReadLine(), out typedValue)
+                        && typedValue.CompareTo(min) >= 0 && typedValue.CompareTo(max) <= 0;
+                    if (!success)
+                    {
+                        println($"You entered an invalid number. Must be between {min} and {max} and a valid integer.");
+                    }
+                } while (!success);
+                return typedValue.ToString();
+            }
+            else return "";
+
+            //return (T)Convert.ChangeType(dbl, typeof(T));
+        }
+
         public static float GetConsoleFloat(string message, float min = float.MinValue, float max = float.MaxValue)
         {
             bool success = false;
