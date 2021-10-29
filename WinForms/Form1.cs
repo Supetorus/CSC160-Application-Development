@@ -24,7 +24,9 @@ namespace WinForms
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Button Clicked!");
+            this.Hide();
+            Containers contained = new Containers();
+            contained.Show();
         }
 
         private void txt_Enter(object sender, EventArgs e)
@@ -35,6 +37,15 @@ namespace WinForms
         private void txt_KeyDown(object sender, KeyEventArgs e)
         {
             MessageBox.Show(e.KeyCode.ToString());
+        }
+
+        private void btnSecondForm_Click(object sender, EventArgs e)
+        {
+            Form2 frm2 = new Form2();
+            frm2.Show();
+            this.Hide();
+            //this.Close();
+            //Application.Exit();
         }
     }
 }

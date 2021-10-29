@@ -32,6 +32,8 @@ namespace WinForms
             this.labelTop = new System.Windows.Forms.Label();
             this.txt = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnSecondForm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelTop
@@ -62,11 +64,22 @@ namespace WinForms
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // btnSecondForm
+            // 
+            this.btnSecondForm.Location = new System.Drawing.Point(71, 117);
+            this.btnSecondForm.Name = "btnSecondForm";
+            this.btnSecondForm.Size = new System.Drawing.Size(161, 29);
+            this.btnSecondForm.TabIndex = 3;
+            this.btnSecondForm.Text = "Second Form";
+            this.btnSecondForm.UseVisualStyleBackColor = true;
+            this.btnSecondForm.Click += new System.EventHandler(this.btnSecondForm_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 430);
+            this.Controls.Add(this.btnSecondForm);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txt);
             this.Controls.Add(this.labelTop);
@@ -82,6 +95,8 @@ namespace WinForms
         private System.Windows.Forms.Label labelTop;
         private System.Windows.Forms.TextBox txt;
         private System.Windows.Forms.Button btnSubmit;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnSecondForm;
     }
 }
 
