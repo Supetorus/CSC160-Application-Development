@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinForms", "WinForms\WinFor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumberGuess-WinForms", "NumberGuess-WinForms\NumberGuess-WinForms.csproj", "{84B8BD61-D973-4759-8130-E9624A1C5ADF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WPF\WPF.csproj", "{AB5E95CD-E6CA-4366-AB95-88A7101FB99D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF", "WPF\WPF.csproj", "{AB5E95CD-E6CA-4366-AB95-88A7101FB99D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Calculator", "WPF_Calculator\WPF_Calculator.csproj", "{170C25C2-D877-4515-AED1-888A9A7D7F97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{AB5E95CD-E6CA-4366-AB95-88A7101FB99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB5E95CD-E6CA-4366-AB95-88A7101FB99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB5E95CD-E6CA-4366-AB95-88A7101FB99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170C25C2-D877-4515-AED1-888A9A7D7F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170C25C2-D877-4515-AED1-888A9A7D7F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170C25C2-D877-4515-AED1-888A9A7D7F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170C25C2-D877-4515-AED1-888A9A7D7F97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
