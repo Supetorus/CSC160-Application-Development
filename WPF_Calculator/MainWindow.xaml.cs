@@ -22,6 +22,7 @@ namespace WPF_Calculator
     {
         private enum Operation
         {
+            START,
             NONE,
             ADD,
             SUBTRACT,
@@ -39,9 +40,9 @@ namespace WPF_Calculator
         Operation lastOp;
         KeypadState ks = KeypadState.REPLACE;
         string textBox = "";
-        double num1;
+        decimal num1;
+        decimal num2;
         bool num1Set = false;
-        double num2;
         bool showingResult = false;
 
         public MainWindow()
@@ -51,34 +52,38 @@ namespace WPF_Calculator
 
         private void Number_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
+            Button btn = ((Button)sender);
             bool isPeriod = btn.Content.ToString().Contains(".");
-            bool containsPeriod = textBox.Contains(".");
+            bool hasPeriod = textBox.Contains(".");
+/*            if (showingResult) Reset();*/
 
-            if (ks == KeypadState.APPEND)
+            if (isPeriod && !hasPeriod || !isPeriod)
             {
-                if (isPeriod && !containsPeriod || !isPeriod)
-                    textBox += btn.Content.ToString();
+                switch (ks)
+                {
+                    case KeypadState.APPEND:
+                        textBox += btn.Content.ToString();
+                        break;
+                    case KeypadState.REPLACE:
+                        textBox = btn.Content.ToString();
+                        ks = KeypadState.APPEND;
+                        break;
+                }
             }
-            else
-            {
-                if (isPeriod && !containsPeriod || !isPeriod)
-                    textBox = btn.Content.ToString();
-            }
-
+            showingResult = false;
             Update();
-            ks = KeypadState.APPEND;
         }
 
         private void Reset()
         {
+            textBox = "";
             num1 = 0;
             num2 = 0;
             num1Set = false;
-            textBox = "";
-            op = Operation.NONE;
-            ks = KeypadState.REPLACE;
             showingResult = false;
+            op = Operation.START;
+            ks = KeypadState.REPLACE;
+            lastOp = Operation.START;
             Update();
         }
 
@@ -138,85 +143,90 @@ namespace WPF_Calculator
                     btnMultiply.Foreground = Brushes.White;
                     break;
             }
-
-            // Debug code
-            txtNum1.Text = num1.ToString();
-            txtNum2.Text = num2.ToString();
-            if (num1Set) txtNum1.Foreground = Brushes.Black;
-            else txtNum1.Foreground = Brushes.Gray;
         }
 
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
-            op = Operation.ADD;
-            if (!showingResult) doOp();
-            Update();
+            doOp(Operation.ADD);
         }
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
-            op = Operation.SUBTRACT;
-            if (!showingResult) doOp();
-            Update();
+            doOp(Operation.SUBTRACT);
         }
 
         private void Divide_Click(object sender, RoutedEventArgs e)
         {
-            op = Operation.DIVIDE;
-            if (!showingResult) doOp();
-            Update();
+            doOp(Operation.DIVIDE);
         }
 
         private void Multiply_Click(object sender, RoutedEventArgs e)
         {
-            op = Operation.MULTIPLY;
-            if (!showingResult) doOp();
-            Update();
+            doOp(Operation.MULTIPLY);
         }
 
-        private void doOp()
+        private void doOp(Operation currentOp)
         {
-            ks = KeypadState.REPLACE;
-            if (num1Set)
+            if (!num1Set)
             {
-                double.TryParse(resultBox.Text, out num2);
-                Calc();
-                textBox = num1.ToString();
+                decimal.TryParse(textBox, out num1);
+                num1Set = true;
                 ks = KeypadState.REPLACE;
+                op = currentOp;
             }
             else
             {
-                double.TryParse(textBox, out num1);
-                num1Set = true;
+                if (op == currentOp || op == Operation.START)
+                {
+                    op = currentOp;
+                    if (!showingResult) decimal.TryParse(textBox, out num2);
+                    Calc();
+                    textBox = num1.ToString();
+                }
+                else
+                {
+                    op = currentOp;
+                    showingResult = false;
+                }
             }
-            showingResult = false;
+            Update();
         }
 
         private void Calc()
         {
+            if (op == Operation.NONE && lastOp != Operation.START) op = lastOp;
             switch (op)
             {
                 case Operation.ADD:
                     num1 = num1 + num2;
+                    textBox = num1.ToString();
                     break;
                 case Operation.SUBTRACT:
                     num1 = num1 - num2;
+                    textBox = num1.ToString();
                     break;
                 case Operation.MULTIPLY:
                     num1 = num1 * num2;
+                    textBox = num1.ToString();
                     break;
                 case Operation.DIVIDE:
-                    num1 = num1 / num2;
+                    if (num2 != 0) num1 = num1 / num2;
+                    else
+                    {
+                        Reset();
+                        textBox = "NaN";
+                    }
                     break;
             }
+            showingResult = true;
+            ks = KeypadState.REPLACE;
+            lastOp = op;
         }
 
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
-            if (!showingResult) double.TryParse(resultBox.Text, out num2);
-            else op = lastOp;
+            if (!showingResult) decimal.TryParse(resultBox.Text, out num2);
             Calc();
-            textBox = num1.ToString();
             lastOp = op;
             op = Operation.NONE;
             ks = KeypadState.REPLACE;
@@ -226,7 +236,26 @@ namespace WPF_Calculator
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
+
             Reset();
+            Update();
+        }
+
+        private void btnPercent_Click(object sender, RoutedEventArgs e)
+        {
+            decimal percent;
+            decimal.TryParse(resultBox.Text, out percent);
+            if (!num1Set) percent = percent / 100;
+            else percent = percent / 100 * num1;
+            textBox = percent.ToString();
+            Update();
+        }
+
+        private void btnFlipSign_Click(object sender, RoutedEventArgs e)
+        {
+            textBox = resultBox.Text;
+            if (textBox[0] == '-') textBox = textBox.Substring(1);
+            else textBox = textBox.Insert(0, "-");
             Update();
         }
     }

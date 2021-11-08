@@ -9,11 +9,11 @@
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="72.149"/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -23,25 +23,23 @@
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="resultBox" Padding="0, 0, 30, 0" Text="0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Right" FontSize="40"  Grid.ColumnSpan="4"/>
         <Button x:Name="btnClear" Content="AC" Grid.Column="0" Grid.Row="1" Style="{StaticResource GrayButton}" Click="Clear_Click" Focusable="False"/>
-        <Button x:Name="btnFlipSign" Content="+/-" Grid.Column="1" Grid.Row="1" Style="{StaticResource GrayButton}" Focusable="False"/>
-        <Button x:Name="btnPercent" Content="%" Grid.Column="2" Grid.Row="1" Style="{StaticResource GrayButton}" Focusable="False"/>
+        <Button x:Name="btnFlipSign" Content="+/-" Grid.Column="1" Grid.Row="1" Style="{StaticResource GrayButton}" Focusable="False" Click="btnFlipSign_Click"/>
+        <Button x:Name="btnPercent" Content="%" Grid.Column="2" Grid.Row="1" Style="{StaticResource GrayButton}" Focusable="False" Click="btnPercent_Click"/>
         <Button x:Name="btnDivide" Content="/" Grid.Column="3" Grid.Row="1" Style="{StaticResource OrangeButton}" Focusable="False" Click="Divide_Click"/>
-        <Button Content="7" Grid.Column="0" Grid.Row="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
-        <Button Content="8" Grid.Column="1" Grid.Row="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
-        <Button Content="9" Grid.Column="2" Grid.Row="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn7" Content="7" Grid.Column="0" Grid.Row="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn8" Content="8" Grid.Column="1" Grid.Row="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn9" Content="9" Grid.Column="2" Grid.Row="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
         <Button x:Name="btnMultiply" Content="X" Grid.Column="3" Grid.Row="2" Style="{StaticResource OrangeButton}" Focusable="False" Click="Multiply_Click"/>
-        <Button Content="4" Grid.Column="0" Grid.Row="3" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
-        <Button Content="5" Grid.Column="1" Grid.Row="3" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
-        <Button Content="6" Grid.Column="2" Grid.Row="3" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn4" Content="4" Grid.Column="0" Grid.Row="3" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn5" Content="5" Grid.Column="1" Grid.Row="3" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn6" Content="6" Grid.Column="2" Grid.Row="3" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
         <Button x:Name="btnMinus" Content="-" Grid.Column="3" Grid.Row="3" Style="{StaticResource OrangeButton}" Focusable="False" Click="Minus_Click"/>
-        <Button Content="1" Grid.Column="0" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
-        <Button Content="2" Grid.Column="1" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
-        <Button Content="3" Grid.Column="2" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn1" Content="1" Grid.Column="0" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn2" Content="2" Grid.Column="1" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn3" Content="3" Grid.Column="2" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
         <Button x:Name="btnPlus" Content="+" Grid.Column="3" Grid.Row="4" Style="{StaticResource OrangeButton}" Click="Plus_Click" Focusable="False"/>
-        <Button Content="0" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
-        <Button Content="." Grid.Column="2" Grid.Row="5" Style="{StaticResource BlackButton}" Focusable="False"/>
+        <Button x:Name="btn0" Content="0" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btnPeriod" Content="." Grid.Column="2" Grid.Row="5" Style="{StaticResource BlackButton}" Focusable="False" Click="Number_Click"/>
         <Button x:Name="btnCalculate" Content="=" Grid.Column="3" Grid.Row="5" Style="{StaticResource OrangeButton}" Click="Calculate_Click" Focusable="False"/>
-        <TextBox x:Name="txtNum1" TextWrapping="Wrap" Margin="21,0,0,86"/>
-        <TextBox x:Name="txtNum2" TextWrapping="Wrap" Margin="11,0,10,86" Grid.Column="1"/>
     </Grid>
 </Window>
