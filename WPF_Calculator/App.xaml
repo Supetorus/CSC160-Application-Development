@@ -13,26 +13,69 @@
             <Setter Property="Height" Value="60"/>
             <Setter Property="Width" Value="60"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="24"/>
         </Style>
         
+        <!-- Dark Numpad buttons -->
         <Style x:Key="BlackButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
             <Setter Property="Background" Value="#333333" />
             <Setter Property="Foreground" Value="#feffff" />
-            <Setter Property="FontSize" Value="20"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Red"/>
-                </Trigger>
-            </Style.Triggers>
+            <!-- The rest of this is just to make it change color on hover. -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#737373" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+        
+        <!-- Orange functional buttons -->
         <Style x:Key="OrangeButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
             <Setter Property="Background" Value="#fe9f0a" />
             <Setter Property="Foreground" Value="#feffff" />
-            <Setter Property="FontSize" Value="20"/>
+            <!-- The rest of this is just to make it change color on hover. -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#fbc78d" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+        
+        <!-- Light gray buttons -->
         <Style x:Key="GrayButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
             <Setter Property="Background" Value="#a5a5a5" />
-            <Setter Property="FontSize" Value="20"/>
+            <!-- The rest of this is just to make it change color on hover. -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#d9d9d9" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         
     </Application.Resources>

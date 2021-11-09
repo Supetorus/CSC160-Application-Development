@@ -20,6 +20,17 @@ namespace WPF_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        Operation op;
+        Operation lastOp;
+        KeypadState ks = KeypadState.REPLACE;
+        string textBox = "";
+        decimal num1;
+        decimal num2;
+        bool num1Set = false;
+        bool showingResult = false;
+        bool numEntered = false;
+        int roundingPrecision = 10;
+        
         private enum Operation
         {
             START,
@@ -36,36 +47,29 @@ namespace WPF_Calculator
             REPLACE
         }
 
-        Operation op;
-        Operation lastOp;
-        KeypadState ks = KeypadState.REPLACE;
-        string textBox = "";
-        decimal num1;
-        decimal num2;
-        bool num1Set = false;
-        bool showingResult = false;
-
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Number_Click(object sender, RoutedEventArgs e)
+        // Methods
+
+        private void AddNum(string btnNum)
         {
-            Button btn = ((Button)sender);
-            bool isPeriod = btn.Content.ToString().Contains(".");
+            if (showingResult) Clear(true);
+            bool isPeriod = btnNum.Contains(".");
             bool hasPeriod = textBox.Contains(".");
-/*            if (showingResult) Reset();*/
 
             if (isPeriod && !hasPeriod || !isPeriod)
             {
+                numEntered = true;
                 switch (ks)
                 {
                     case KeypadState.APPEND:
-                        textBox += btn.Content.ToString();
+                        textBox += btnNum;
                         break;
                     case KeypadState.REPLACE:
-                        textBox = btn.Content.ToString();
+                        textBox = btnNum;
                         ks = KeypadState.APPEND;
                         break;
                 }
@@ -74,22 +78,11 @@ namespace WPF_Calculator
             Update();
         }
 
-        private void Reset()
-        {
-            textBox = "";
-            num1 = 0;
-            num2 = 0;
-            num1Set = false;
-            showingResult = false;
-            op = Operation.START;
-            ks = KeypadState.REPLACE;
-            lastOp = Operation.START;
-            Update();
-        }
-
         private void Update()
         {
             resultBox.Text = textBox;
+            if (numEntered) btnClear.Content = "C";
+            else btnClear.Content = "AC";
             switch (op)
             {
                 case Operation.ADD:
@@ -145,26 +138,6 @@ namespace WPF_Calculator
             }
         }
 
-        private void Plus_Click(object sender, RoutedEventArgs e)
-        {
-            doOp(Operation.ADD);
-        }
-
-        private void Minus_Click(object sender, RoutedEventArgs e)
-        {
-            doOp(Operation.SUBTRACT);
-        }
-
-        private void Divide_Click(object sender, RoutedEventArgs e)
-        {
-            doOp(Operation.DIVIDE);
-        }
-
-        private void Multiply_Click(object sender, RoutedEventArgs e)
-        {
-            doOp(Operation.MULTIPLY);
-        }
-
         private void doOp(Operation currentOp)
         {
             if (!num1Set)
@@ -213,14 +186,14 @@ namespace WPF_Calculator
                     textBox = num1.ToString();
                     break;
                 case Operation.MULTIPLY:
-                    num1 = num1 * num2;
+                    num1 = Decimal.Round((Decimal)(num1 * num2), roundingPrecision);
                     textBox = num1.ToString();
                     break;
                 case Operation.DIVIDE:
-                    if (num2 != 0) num1 = num1 / num2;
+                    if (num2 != 0) num1 = Decimal.Round((Decimal)(num1 / num2), roundingPrecision);
                     else
                     {
-                        Reset();
+                        Clear(true);
                         textBox = "NaN";
                     }
                     break;
@@ -230,22 +203,74 @@ namespace WPF_Calculator
             lastOp = op;
         }
 
-        private void Calculate_Click(object sender, RoutedEventArgs e)
+        private void Equals()
         {
             if (!showingResult) decimal.TryParse(resultBox.Text, out num2);
             Calc();
-            lastOp = op;
             op = Operation.NONE;
-            ks = KeypadState.REPLACE;
+            textBox = num1.ToString();
             showingResult = true;
             Update();
         }
 
+        private void Clear(bool clearAll)
+        {
+            if (clearAll)
+            {
+                textBox = "0";
+                num1 = 0;
+                num2 = 0;
+                num1Set = false;
+                showingResult = false;
+                op = Operation.START;
+                ks = KeypadState.REPLACE;
+                lastOp = Operation.START;
+                numEntered = false;
+            }
+            else textBox = "0";
+            numEntered = false;
+            Update();
+        }
+
+        // Event Handlers
+
+        private void Number_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = ((Button)sender);
+            string btnNum = btn.Content.ToString();
+            AddNum(btnNum);
+        }
+
+        private void Plus_Click(object sender, RoutedEventArgs e)
+        {
+            doOp(Operation.ADD);
+        }
+
+        private void Minus_Click(object sender, RoutedEventArgs e)
+        {
+            doOp(Operation.SUBTRACT);
+        }
+
+        private void Divide_Click(object sender, RoutedEventArgs e)
+        {
+            doOp(Operation.DIVIDE);
+        }
+
+        private void Multiply_Click(object sender, RoutedEventArgs e)
+        {
+            doOp(Operation.MULTIPLY);
+        }
+
+        private void Calculate_Click(object sender, RoutedEventArgs e)
+        {
+            Equals();
+        }
+
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-
-            Reset();
-            Update();
+            Button btn = sender as Button;
+            if (btn.Content.ToString().Equals("AC")) Clear(true);
+            else Clear(false);
         }
 
         private void btnPercent_Click(object sender, RoutedEventArgs e)
@@ -266,14 +291,33 @@ namespace WPF_Calculator
             Update();
         }
 
-        private void light_btn_mouse_enter(object sender, MouseEventArgs e)
+        private void OnTextInputKeyDown(object sender, KeyEventArgs e)
         {
-            (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#d9d9d9");
-        }
-
-        private void light_btn_mouse_exit(object sender, MouseEventArgs e)
-        {
-            (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#a5a5a5");
+            if (e.Key == Key.LeftShift) return;
+            if (e.Key == Key.D8 && Keyboard.Modifiers == ModifierKeys.Shift) doOp(Operation.MULTIPLY);
+            else if (e.Key == Key.OemPlus && Keyboard.Modifiers == ModifierKeys.Shift) doOp(Operation.ADD);
+            else if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+            {
+                AddNum(e.Key.ToString().Replace("D", "").Replace("NumPad", ""));
+            }
+            else if (e.Key == Key.OemPeriod)
+            {
+                AddNum(".");
+            }
+            else if (e.Key == Key.Escape)
+            {
+                if (btnClear.Content.ToString().Equals("AC")) Clear(true);
+                else Clear(false);
+            }
+            else if (e.Key == Key.Back) textBox = textBox.Substring(0, textBox.Length - 1);
+            else if (e.Key == Key.Enter)
+            {
+                Equals();
+            }
+            else if (e.Key == Key.OemMinus) doOp(Operation.SUBTRACT);
+            else if (e.Key == Key.D8) doOp(Operation.MULTIPLY);
+            else if (e.Key == Key.Oem2) doOp(Operation.DIVIDE);
+            Update();
         }
     }
 }

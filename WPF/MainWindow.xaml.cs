@@ -24,12 +24,18 @@ namespace WPF
         {
             InitializeComponent();
 
-            TheMainWindow.Title = "Title of form";
+            DataContext = this;
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+        }
+
+        private void btnUpdateSource_Click(object sender, RoutedEventArgs e)
+        {
+            BindingExpression be = txtTitle.GetBindingExpression(TextBox.TextProperty);
+            be.UpdateSource();
         }
     }
 }
