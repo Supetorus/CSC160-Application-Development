@@ -1,0 +1,12 @@
+Numbers
+Default: #333333
+Hover:   #737373
+
+Operation Keys
+Default:  #fe9f0a
+Hover:    #fbc78d
+Selected: #feffff
+
+Top Keys
+Default: #a5a5a5
+Hover:   #d9d9d9

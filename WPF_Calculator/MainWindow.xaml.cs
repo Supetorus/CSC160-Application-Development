@@ -265,5 +265,15 @@ namespace WPF_Calculator
             else textBox = textBox.Insert(0, "-");
             Update();
         }
+
+        private void light_btn_mouse_enter(object sender, MouseEventArgs e)
+        {
+            (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#d9d9d9");
+        }
+
+        private void light_btn_mouse_exit(object sender, MouseEventArgs e)
+        {
+            (sender as Button).Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#a5a5a5");
+        }
     }
 }
