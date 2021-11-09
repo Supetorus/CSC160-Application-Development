@@ -185,8 +185,15 @@ namespace WPF_Calculator
                 }
                 else
                 {
+                    if (!showingResult)
+                    {
+                        decimal.TryParse(textBox, out num2);
+                        Calc();
+                    }
+                    // do something different, but maybe not all the time.
                     op = currentOp;
                     showingResult = false;
+                    ks = KeypadState.REPLACE;
                 }
             }
             Update();

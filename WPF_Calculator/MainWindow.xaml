@@ -38,8 +38,9 @@
         <Button x:Name="btn2" Content="2" Grid.Column="1" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
         <Button x:Name="btn3" Content="3" Grid.Column="2" Grid.Row="4" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
         <Button x:Name="btnPlus" Content="+" Grid.Column="3" Grid.Row="4" Style="{StaticResource OrangeButton}" Click="Plus_Click" Focusable="False"/>
-        <Button x:Name="btn0" Content="0" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
+        <Button x:Name="btn0" Content="0" Width="140" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource BlackButton}" Click="Number_Click" Focusable="False"/>
         <Button x:Name="btnPeriod" Content="." Grid.Column="2" Grid.Row="5" Style="{StaticResource BlackButton}" Focusable="False" Click="Number_Click"/>
         <Button x:Name="btnCalculate" Content="=" Grid.Column="3" Grid.Row="5" Style="{StaticResource OrangeButton}" Click="Calculate_Click" Focusable="False"/>
+
     </Grid>
 </Window>

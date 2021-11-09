@@ -4,19 +4,30 @@
              xmlns:local="clr-namespace:WPF_Calculator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="BlackButton" TargetType="Button">
-            <Setter Property="Background" Value="Black" />
+        <Style TargetType="Button" x:Key="RoundButton">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="35"/>
+                </Style>
+            </Style.Resources>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Width" Value="60"/>
+        </Style>
+        
+        <Style x:Key="BlackButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
+            <Setter Property="Background" Value="Gray" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style x:Key="OrangeButton" TargetType="Button">
+        <Style x:Key="OrangeButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
             <Setter Property="Background" Value="Orange" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style x:Key="GrayButton" TargetType="Button">
+        <Style x:Key="GrayButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
             <Setter Property="Background" Value="LightGray" />
             <Setter Property="FontSize" Value="20"/>
         </Style>
+        
     </Application.Resources>
 </Application>
