@@ -233,7 +233,6 @@ namespace WPF_Calculator
         }
 
         // Event Handlers
-
         private void Number_Click(object sender, RoutedEventArgs e)
         {
             Button btn = ((Button)sender);
