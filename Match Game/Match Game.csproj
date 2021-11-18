@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>Match_Game</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\card.png" />
+    <None Remove="Resources\card.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\card.png" />
+    <Resource Include="Resources\card.wav" />
+  </ItemGroup>
+
+</Project>
