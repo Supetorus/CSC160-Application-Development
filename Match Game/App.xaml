@@ -1,9 +1,10 @@
 ﻿<Application x:Class="Match_Game.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Match_Game"
-             StartupUri="GameWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:local="clr-namespace:Match_Game"
+			 xmlns:system="clr-namespace:System;assembly=mscorlib"
+			 StartupUri="GameWindow.xaml">
+	<Application.Resources>
+		<system:String x:Key="gameTitle">Match Game</system:String>
+	</Application.Resources>
 </Application>

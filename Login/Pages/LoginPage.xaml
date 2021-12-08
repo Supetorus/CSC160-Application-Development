@@ -1,0 +1,45 @@
+﻿<Page x:Class="Login.LoginPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:local="clr-namespace:Login"
+	  mc:Ignorable="d"
+	  d:DesignHeight="450"
+	  d:DesignWidth="800"
+	  Title="LoginPage"
+	  FocusManager.FocusedElement="{Binding ElementName=txtUsername}">
+
+	<StackPanel Width="300"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center">
+		<TextBlock Text="Login"
+				   HorizontalAlignment="Center"
+				   FontSize="32"
+				   Margin="0, 0, 0, 10" />
+		<TextBlock Text="Username"
+				   HorizontalAlignment="center" />
+		<TextBox x:Name="txtUsername"
+				 HorizontalAlignment="Center"
+				 MinWidth="180"
+				 Margin="10" />
+		<TextBlock Text="Password"
+				   HorizontalAlignment="center" />
+		<PasswordBox x:Name="pwPassword"
+			HorizontalAlignment="Center"
+				 MinWidth="180"
+				 Margin="10"
+					 KeyDown="Key_Down" />
+		<Button Content="Submit"
+				HorizontalAlignment="Center"
+				Margin="10"
+				Click="Submit_Click" />
+		<TextBlock Text="Or"
+				   HorizontalAlignment="Center"
+				   FontSize="24"
+				   Margin="0, 0, 0, 10"/>
+		<Button Content="Create New Account"
+				HorizontalAlignment="Center"
+				Click="NewAccount_Click" />
+	</StackPanel>
+</Page>

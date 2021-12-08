@@ -16,105 +16,115 @@ using System.Windows.Shapes;
 
 namespace Match_Game.Controls
 {
-    public partial class Card : UserControl, INotifyPropertyChanged
-    {
-        public enum eState
-        {
-            Inactive,
-            Idle,
-            Flipped,
-            Matched
-        }
+	public partial class Card : UserControl, INotifyPropertyChanged
+	{
+		public enum eState
+		{
+			Inactive,
+			Idle,
+			Flipped,
+			Matched
+		}
 
-        public GameWindow Owner { get; set; }
+		public GameWindow Owner { get; set; }
 
-        private eState state = eState.Inactive;
+		private Random random = new Random();
 
-        public eState State
-        {
-            get { return state; }
-            set
-            {
-                if (value != state)
-                {
-                    state = value;
-                    Interactable = (state == eState.Idle);
-                    Show = (state == eState.Flipped || state == eState.Matched);
-                    NotifyPropertyChanged("State");
-                }
-            }
-        }
+		private eState state = eState.Inactive;
 
-        public bool Show
-        {
-            set
-            {
-                if (value)
-                {
+		public eState State
+		{
+			get { return state; }
+			set
+			{
+				if (value != state)
+				{
+					state = value;
+					Interactable = state == eState.Idle;
+					Show = state == eState.Flipped || state == eState.Matched;
+					NotifyPropertyChanged("State");
+				}
+			}
+		}
 
-                }
-                else
-                {
-                    lblSymbol.Visibility = Visibility.Hidden;
-                    imgCard.Visibility = Visibility.Visible;
-                }
-            }
-        }
+		public bool Show
+		{
+			set
+			{
+				if (value)
+				{
+					lblSymbol.Visibility = Visibility.Visible;
+					imgCard.Visibility = Visibility.Hidden;
+				}
+				else
+				{
+					lblSymbol.Visibility = Visibility.Hidden;
+					imgCard.Visibility = Visibility.Visible;
+				}
+			}
+		}
 
-        private bool interactable;
+		private bool interactable;
 
-        public bool Interactable
-        {
-            get { return interactable; }
-            set
-            {
-                if (value != interactable)
-                {
-                    interactable = value;
-                    NotifyPropertyChanged("Interactable");
-                }
-            }
-        }
+		public bool Interactable
+		{
+			get { return interactable; }
+			set
+			{
+				if (value != interactable)
+				{
+					interactable = value;
+					NotifyPropertyChanged("Interactable");
+				}
+			}
+		}
 
-        private string symbol;
+		private string symbol;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Symbol
-        {
-            get { return symbol; }
-            set
-            {
-                if (value != symbol)
-                {
-                    symbol = value;
-                    NotifyPropertyChanged("Symbol");
-                }
-            }
-        }
+		public string Symbol
+		{
+			get { return symbol; }
+			set
+			{
+				if (value != symbol)
+				{
+					symbol = value;
+					NotifyPropertyChanged("Symbol");
+				}
+			}
+		}
 
-        public Card()
-        {
-            InitializeComponent();
-            DataContext = this;
-            this.Loaded += Card_Loaded;
-        }
+		public Card()
+		{
+			InitializeComponent();
+			DataContext = this;
+			this.Loaded += Card_Loaded;
+		}
 
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+		public void Setup(List<string> symbols)
+		{
+			State = Card.eState.Idle;
+			int r = random.Next(0, symbols.Count());
+			Symbol = symbols[r];
+			symbols.RemoveAt(r);
+		}
 
-        private void Card_Loaded(object sender, RoutedEventArgs e)
-        {
-            Owner = (GameWindow)Window.GetWindow(this);
-            Owner.RegisterCard(this);
-        }
+		public void NotifyPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
 
-        private void btnCard_Click(object sender, RoutedEventArgs e)
-        {
-            State = eState.Flipped;
-            Owner.SelectCard(this);
-        }
-    }
+		private void Card_Loaded(object sender, RoutedEventArgs e)
+		{
+			Owner = (GameWindow)Window.GetWindow(this);
+			Owner.RegisterCard(this);
+		}
+
+		private void btnCard_Click(object sender, RoutedEventArgs e)
+		{
+			Owner.SelectCard(this);
+		}
+	}
 }
